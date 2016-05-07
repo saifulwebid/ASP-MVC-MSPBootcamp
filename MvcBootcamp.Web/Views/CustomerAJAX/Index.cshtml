@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MvcBootcamp.DAL.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+
+    @using(Ajax.BeginForm("Search", "CustomerAJAX",
+        new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET",
+            UpdateTargetId = "results"
+        }))
+    {
+        <div class="form-group form-control">
+            <input type="text" name="name" />
+            <input type="submit" value="Search by AJAX" />
+        </div>
+    }
+
+</div>
+
+<div id="results">
+    No results.
+</div>
+
+<div>
+    <ul>
+        @foreach (var customer in Model)
+        {
+            <li>
+                @Ajax.ActionLink(customer.CustomerID, "Search", new { name = customer.CompanyName },
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET",
+                        UpdateTargetId = "details"
+                    })
+            </li>
+        }
+    </ul>
+</div>
+
+<div id="details">
+    No details.
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

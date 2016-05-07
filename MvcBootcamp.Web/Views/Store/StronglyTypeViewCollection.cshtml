@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MvcBootcamp.Web.Models.Customer>
+
+@{
+    ViewBag.Title = "StronglyTypeViewCollection";
+}
+
+@Html.Partial("_PartialViewDemo")
+
+@{
+    Html.RenderPartial("_PartialViewDemo");
+}
