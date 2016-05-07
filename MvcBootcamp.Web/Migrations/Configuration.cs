@@ -9,7 +9,7 @@ namespace MvcBootcamp.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(MvcBootcamp.Web.Models.ApplicationDbContext context)
