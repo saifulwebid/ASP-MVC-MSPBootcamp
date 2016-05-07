@@ -5,6 +5,10 @@ namespace MvcBootcamp.Web.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity;
+    using Models;
+
     internal sealed class Configuration : DbMigrationsConfiguration<MvcBootcamp.Web.Models.ApplicationDbContext>
     {
         public Configuration()
@@ -14,18 +18,33 @@ namespace MvcBootcamp.Web.Migrations
 
         protected override void Seed(MvcBootcamp.Web.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var user = new ApplicationUser { UserName = "admin" };
+                userManager.Create(user, "MvcBootcamp2016");
+                roleManager.Create(new IdentityRole { Name = "Administrators" });
+                userManager.AddToRole(user.Id, "Administrators");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "user1"))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                var user = new ApplicationUser { UserName = "user1" };
+                userManager.Create(user, "MvcBootcamp2016");
+                roleManager.Create(new IdentityRole { Name = "Members" });
+                userManager.AddToRole(user.Id, "Members");
+            }
         }
     }
 }
