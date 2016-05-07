@@ -182,6 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerAJAXController.cs" />
+    <Compile Include="Controllers\CustomerApiClientController.cs" />
     <Compile Include="Controllers\CustomerRouteController.cs" />
     <Compile Include="Controllers\CustomersApiController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -276,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CustomerApiClient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
