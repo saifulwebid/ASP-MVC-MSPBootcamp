@@ -13,6 +13,13 @@ using MvcBootcamp.NorthwindRepository.Repositories;
 
 namespace MvcBootcamp.Web.Controllers
 {
+    /* Beberapa attribute yang tersedia untuk authentication:
+     * 
+     * [Authorize]
+     * [Authorize(...)]
+     * [AllowAnonymous]
+     */
+    [Authorize]
     public class CustomersController : Controller
     {
         //private NorthwindEntities db = new NorthwindEntities();
@@ -22,8 +29,9 @@ namespace MvcBootcamp.Web.Controllers
         {
             custRepo = new CustomerRepository();
         }
-
+        
         // GET: Customers
+        [AllowAnonymous]
         public ActionResult Index()
         {
             //return View(db.Customers.ToList());
@@ -47,6 +55,7 @@ namespace MvcBootcamp.Web.Controllers
         }
 
         // GET: Customers/Create
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             return View();
@@ -57,6 +66,7 @@ namespace MvcBootcamp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customer customer)
         {
             throw new Exception("Testing error");
