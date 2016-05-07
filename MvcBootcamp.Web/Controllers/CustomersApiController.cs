@@ -16,6 +16,11 @@ namespace MvcBootcamp.Web.Controllers
     {
         private NorthwindEntities db = new NorthwindEntities();
 
+        public CustomersApiController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+
         // GET: api/CustomersApi
         public IQueryable<Customer> GetCustomers()
         {
