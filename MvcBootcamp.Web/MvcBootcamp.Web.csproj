@@ -274,10 +274,10 @@
     <Content Include="Views\CustomerRoute\Index.cshtml" />
     <Content Include="Views\CustomerRoute\Search.cshtml" />
     <Content Include="Views\Shared\Error2.cshtml" />
+    <Content Include="Views\CustomerApiClient\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CustomerApiClient\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Customers Client Web API";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <input type="button" value="Get All Customers" id="btngetall" class="btn btn-default" />
+    <input type="button" value="Find Customer" id="btnfind" class="btn btn-default"" />
+    <input type="button" value="Update Customer" id="btnupdate" class="btn btn-default"" />
+    <input type="button" value="Delete Customer" id="btndelete" class="btn btn-default"" />
+
+    <hr />
+
+    <table class="table table-striped">
+        <tr>
+            <th>Customer ID:</th>
+            <td><input type="text" class="form-control" id="txtid" /></td>
+        </tr>
+        <tr>
+            <th>Company Name:</th>
+            <td><input type="text" class="form-control" id="txtname" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="Insert" id="btninsert" class="btn btn-default" /></td>
+        </tr>
+    </table>
+</div>
+
+<div id="divstatus"></div>
+
+<div>
+    <table id="tblcustomer" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Company Name</th>
+            </tr>
+        </thead>
+        <tbody id="tblbody"></tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function GetCustomers() {
+            $.ajax({
+                url: "/api/CustomersApi",
+                type: "GET",
+                success: function (data) {
+                    var tbody = $("#tblbody");
+                    tbody.empty();
+
+                    for (var i = 0; i < data.length; i++) {
+                        $("<tr><td>" + data[i].CustomerID + "</td>" +
+                            "<td>" + data[i].CompanyName + "</td></tr").appendTo(tbody);
+                    }
+
+                    var divstat = $("#divstatus");
+                    divstat.text("");
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            });
+        }
+
+        function SearchCustomer(id) {
+            $.ajax({
+                url: "/api/CustomersApi/" + id,
+                type: "GET",
+                success: function (data) {
+                    var tbody = $("#tblbody");
+                    tbody.empty();
+
+                    $("<tr><td>" + data.CustomerID + "</td>" +
+                        "<td>" + data.CompanyName + "</td></tr").appendTo(tbody);
+
+                    var divstat = $("#divstatus");
+                    divstat.text("");
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+
+        function InsertCustomer(customerdata) {
+            $.ajax({
+                url: "/api/CustomersApi",
+                type: "POST",
+                data: JSON.stringify(customerdata),
+                contentType: "application/json;charset=utf-8",
+                success: function (data, status, xhr) {
+                    alert("Insert success.");
+                    GetCustomers();
+                },
+                error: function (err) {
+                    alert(err);
+                    console.log(err);
+                }
+            });
+        }
+
+        function DeleteCustomer(id) {
+            $.ajax({
+                url: "/api/CustomersApi/" + id,
+                type: "DELETE",
+                success: function (data, status, xhr) {
+                    alert("Delete success.");
+                    GetCustomers();
+                },
+                error: function (err) {
+                    alert(err);
+                    console.log(err);
+                }
+            });
+        }
+
+        function UpdateCustomer(id, customerdata) {
+            $.ajax({
+                url: "/api/CustomersApi/" + id,
+                type: "PUT",
+                data: JSON.stringify(customerdata),
+                contentType: "application/json;charset=utf-8",
+                success: function (data, status, xhr) {
+                    alert("Update success.");
+                    GetCustomers();
+                },
+                error: function (err) {
+                    alert(err);
+                    console.log(err);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            var btnget = $("#btngetall");
+            var btnfind = $("#btnfind");
+            var btnupdate = $("#btnupdate");
+            var btndelete = $("#btndelete");
+            var btninsert = $("#btninsert");
+            var divstat = $("#divstatus");
+
+            btnget.click(function (e) {
+                divstat.text("Loading ...");
+                GetCustomers();
+            });
+
+            btnfind.click(function (e) {
+                divstat.text("Searching ...");
+                var txtid = $("#txtid");
+                SearchCustomer(txtid.val());
+            });
+
+            btninsert.click(function (e) {
+                divstat.text("Inserting ...");
+                var newCust = {
+                    "CustomerID": $("#txtid").val(),
+                    "CompanyName": $("#txtname").val()
+                };
+                InsertCustomer(newCust);
+            });
+
+            btnupdate.click(function (e) {
+                divstat.text("Updating ...");
+                var custToUpdate = {
+                    "CustomerID": $("#txtid").val(),
+                    "CompanyName": $("#txtname").val()
+                };
+                UpdateCustomer($("#txtid").val(), custToUpdate);
+            });
+
+            btndelete.click(function (e) {
+                divstat.text("Deleting ...");
+                var txtid = $("#txtid");
+                DeleteCustomer(txtid.val());
+            });
+
+        });
+
+    </script>
+}
