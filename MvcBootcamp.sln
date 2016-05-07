@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootcamp.DAL", "MvcBootc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootcamp.NorthwindRepository", "MvcBootcamp.NorthwindRepository\MvcBootcamp.NorthwindRepository.csproj", "{3F31E3F7-848F-4A74-B735-C0AE96D73A00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{096EC00F-B9DA-406E-81AD-E866EFCE7406}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
