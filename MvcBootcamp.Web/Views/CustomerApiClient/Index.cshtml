@@ -54,6 +54,14 @@
                     var tbody = $("#tblbody");
                     tbody.empty();
 
+                    /* Kalau pakai jQuery.each():
+                     *
+                     * $.each(data, function (index, item) {
+                     *     $("<tr><td>" + item.CustomerID + "</td>" +
+                     *         "<td>" + item.CompanyName + "</td></tr").appendTo(tbody);
+                     * });
+                     */
+
                     for (var i = 0; i < data.length; i++) {
                         $("<tr><td>" + data[i].CustomerID + "</td>" +
                             "<td>" + data[i].CompanyName + "</td></tr").appendTo(tbody);
