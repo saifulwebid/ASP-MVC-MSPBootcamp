@@ -92,6 +92,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MvcBootcamp.DAL\MvcBootcamp.DAL.csproj">
+      <Project>{d9b37b91-7431-4ad9-8d3b-cc9e6afd69c6}</Project>
+      <Name>MvcBootcamp.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBootcamp.NorthwindRepository\MvcBootcamp.NorthwindRepository.csproj">
+      <Project>{3f31e3f7-848f-4a74-b735-c0ae96d73a00}</Project>
+      <Name>MvcBootcamp.NorthwindRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MvcBootcamp.Web\MvcBootcamp.Web.csproj">
       <Project>{7E9F8CE7-17EA-4DB6-BB44-5B2E23CB987F}</Project>
       <Name>MvcBootcamp.Web</Name>
