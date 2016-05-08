@@ -16,8 +16,27 @@ namespace MvcBootcamp.Web.Tests
     public class CustomerMockTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetAllData_ReturnAllCustomers()
         {
+            // Arrange
+            var custRepo = Mock.Create<IEntityRepository<Customer, string>>();
+            Mock.Arrange(() => custRepo.GetAllData()).Returns(
+                new List<Customer>()
+                {
+                    new Customer { CustomerID = "1", CompanyName = "Native 1" },
+                    new Customer { CustomerID = "2", CompanyName = "Native 2" },
+                    new Customer { CustomerID = "3", CompanyName = "Native 3" }
+                }.AsQueryable()).MustBeCalled();
+
+            // Act
+            CustomersController controller = new CustomersController(custRepo);
+            ViewResult view = controller.Index() as ViewResult;
+            var model = view.Model as IEnumerable<Customer>;
+
+            // Assert
+            Assert.AreEqual(3, model.Count());
+            Assert.IsNotNull(model);
+            Assert.AreEqual("Native 2", model.ToList()[1].CompanyName);
         }
     }
 }
