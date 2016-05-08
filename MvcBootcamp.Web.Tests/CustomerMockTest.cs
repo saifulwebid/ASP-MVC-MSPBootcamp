@@ -38,5 +38,25 @@ namespace MvcBootcamp.Web.Tests
             Assert.IsNotNull(model);
             Assert.AreEqual("Native 2", model.ToList()[1].CompanyName);
         }
+
+        [TestMethod]
+        public void Search_ReturnACustomer()
+        {
+            // Arrange
+            var custRepo = Mock.Create<IEntityRepository<Customer, string>>();
+            Mock.Arrange(() => custRepo.Search("1")).Returns(
+                new Customer {
+                    CustomerID = "1",
+                    CompanyName = "Native 1"
+                }).MustBeCalled();
+
+            // Act
+            CustomersController controller = new CustomersController(custRepo);
+            ViewResult view = controller.Details("1") as ViewResult;
+            var model = view.Model as Customer;
+
+            // Assert
+            Assert.AreEqual("Native 1", model.CompanyName);
+        }
     }
 }
