@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBootcamp.NorthwindReposi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{096EC00F-B9DA-406E-81AD-E866EFCE7406}"
 	ProjectSection(SolutionItems) = preProject
+		Catatan hari ke-4.txt = Catatan hari ke-4.txt
 		README.md = README.md
 	EndProjectSection
 EndProject

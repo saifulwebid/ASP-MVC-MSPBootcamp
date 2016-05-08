@@ -1,0 +1,10 @@
+NuGet Package Manager Console commands:
+
+1. Enable-Migrations
+2. Update-Database -Script
+   Untuk melihat script SQL yang akan di-generate
+3. Update-Database -Verbose
+   Practically executing the update database script
+
+-----------------------------------------------------------------------
+
